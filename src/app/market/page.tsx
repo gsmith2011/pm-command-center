@@ -25,7 +25,6 @@ export default async function MarketPage() {
       ) : (
         <div className="flex flex-col gap-6">
           {stubs.map((stub, i) => {
-            const sections = stub.sections.filter((s) => s.md.trim().length > 0);
             return (
               <Panel key={stub.path} className={`rise rise-${Math.min(i + 2, 5)}`}>
                 <SectionLabel>
@@ -33,10 +32,17 @@ export default async function MarketPage() {
                   <span className="font-mono text-[11px] text-ink-faint">{stub.path}</span>
                 </SectionLabel>
                 <div className="flex flex-col gap-4">
-                  {sections.map((s) => (
+                  {stub.sections.map((s) => (
                     <div key={s.title}>
                       <h3 className="mb-1.5 text-[14px] text-ink">{s.title}</h3>
-                      <Prose md={s.md} from={stub.path} />
+                      {s.md.trim().length > 0 ? (
+                        <Prose md={s.md} from={stub.path} />
+                      ) : (
+                        <p className="text-[12.5px] italic text-ink-faint">
+                          nothing here yet — the file has this section, the section has no
+                          content
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
