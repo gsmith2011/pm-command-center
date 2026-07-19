@@ -115,12 +115,15 @@ export function Timeline({
               <div className="min-w-0">
                 <Link
                   href={e.href}
-                  className={`block truncate text-[13px] text-ink-muted transition-colors hover:text-ink ${dense ? "" : "leading-snug"}`}
+                  title={e.title}
+                  className="line-clamp-2 block text-[13px] leading-snug text-ink-muted transition-colors hover:text-ink"
                 >
                   {e.title}
                 </Link>
                 {!dense && e.detail ? (
-                  <div className="truncate text-[12px] text-ink-faint">{e.detail}</div>
+                  <div title={e.detail} className="line-clamp-2 text-[12px] leading-snug text-ink-faint">
+                    {e.detail}
+                  </div>
                 ) : null}
               </div>
             </div>

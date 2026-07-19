@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { loadBrain } from "@/lib/brain";
 import type { HealthFinding } from "@/lib/brain/types";
-import { formatDate } from "@/lib/semantics";
+import { formatDate, relativeToSync } from "@/lib/semantics";
 import { Panel, SectionLabel, StatTile, EmptyState } from "@/components/ui";
 import { StatusChip, Chip } from "@/components/chips";
 import { EvidenceTally } from "@/components/evidence";
@@ -60,7 +60,7 @@ export default async function Overview() {
         <div className="text-eyebrow mb-2">
           {brain.meta.workspaceName ?? "PM Brain"} · mission control
         </div>
-        <h1 className="text-display max-w-[26ch] text-[32px] text-ink">
+        <h1 className="text-display max-w-[26ch] text-balance text-[32px] text-ink">
           Where things stand, and what needs you
         </h1>
         <p className="mt-2 max-w-[74ch] text-[14px] leading-relaxed text-ink-subtle">
@@ -124,7 +124,17 @@ export default async function Overview() {
             </SectionLabel>
             {needsYou.length ? (
               <div className="space-y-3">
-                {needsYou.map((f: HealthFinding, i) => (
+                {needsYou.map((f: HealthFinding, i) => {
+                  // forcing-date findings get the same countdown pill Strategy uses,
+                  // instead of the "(N days away)" plain text inside the prose
+                  const forcingDate =
+                    f.check === "forcing-date"
+                      ? (f.md.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? null)
+                      : null;
+                  const bodyMd = forcingDate
+                    ? f.md.replace(/\s*\(\d+\s*days?\s*(?:away|past)\)/i, "")
+                    : f.md;
+                  return (
                   <Panel
                     key={i}
                     className={
@@ -136,11 +146,19 @@ export default async function Overview() {
                         className={`mt-1 shrink-0 ${i === 0 ? "text-sem-orange" : "text-ink-subtle"}`}
                       />
                       <div className="min-w-0 flex-1">
-                        <div className="text-[14px] font-semibold tracking-tight text-ink">
-                          {ATTENTION_TITLES[f.check] ?? f.check}
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                          <span className="text-[14px] font-semibold tracking-tight text-ink">
+                            {ATTENTION_TITLES[f.check] ?? f.check}
+                          </span>
+                          {forcingDate ? (
+                            <Chip sem="orange" icon="clock">
+                              forcing {formatDate(forcingDate)} ·{" "}
+                              {relativeToSync(forcingDate, brain.asOf)}
+                            </Chip>
+                          ) : null}
                         </div>
                         <div className="mt-1">
-                          <Prose md={f.md} from="INDEX.md" className="!text-[13px]" />
+                          <Prose md={bodyMd} from="INDEX.md" className="!text-[13px]" />
                         </div>
                       </div>
                       {f.href ? (
@@ -153,7 +171,8 @@ export default async function Overview() {
                       ) : null}
                     </div>
                   </Panel>
-                ))}
+                  );
+                })}
               </div>
             ) : (
               <EmptyState

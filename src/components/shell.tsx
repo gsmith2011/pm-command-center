@@ -49,17 +49,18 @@ export async function Shell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen">
-      <aside className="fixed inset-y-0 left-0 z-40 flex w-[228px] flex-col border-r border-hairline bg-canvas">
+      <aside className="fixed inset-y-0 left-0 z-40 flex w-[256px] flex-col border-r border-hairline bg-canvas">
         <Link href="/" className="flex items-center gap-2.5 px-4 pb-4 pt-5">
           <span className="flex h-6 w-6 items-center justify-center rounded-md bg-accent/90 text-white">
             <Icons.loop width={13} height={13} />
           </span>
-          <span className="flex flex-col leading-tight">
+          <span className="flex min-w-0 flex-col leading-tight">
             <span className="text-[13.5px] font-semibold tracking-tight text-ink">
               PM Command Center
             </span>
-            <span className="font-mono text-[10.5px] text-ink-faint">
-              {brain.meta.workspaceName ?? "pm-brain"} · read-only
+            <span className="flex min-w-0 items-baseline whitespace-nowrap font-mono text-[10.5px] text-ink-faint">
+              <span className="truncate">{brain.meta.workspaceName ?? "pm-brain"}</span>
+              <span className="shrink-0">&nbsp;· read-only</span>
             </span>
           </span>
         </Link>
@@ -96,7 +97,7 @@ export async function Shell({ children }: { children: React.ReactNode }) {
           </Tip>
         </div>
       </aside>
-      <div className="ml-[228px] flex-1">
+      <div className="ml-[256px] flex-1">
         <header className="sticky top-0 z-30 flex h-[52px] items-center justify-between border-b border-hairline bg-canvas/85 px-6 backdrop-blur">
           <div className="text-[12.5px] text-ink-subtle">
             The brain, made visible — beliefs, evidence, disagreements, and decisions,{" "}
