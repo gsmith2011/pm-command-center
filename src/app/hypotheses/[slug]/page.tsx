@@ -9,6 +9,8 @@ import { EvidenceBalance } from "@/components/evidence";
 import { Prose } from "@/components/prose";
 import { Gloss, Tip } from "@/components/tip";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const brain = await loadBrain();
   return brain.hypotheses.map((h) => ({ slug: h.slug }));

@@ -7,6 +7,8 @@ import { PageHeader, Panel, RailLink, SectionLabel } from "@/components/ui";
 import { Chip } from "@/components/chips";
 import { Prose } from "@/components/prose";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const brain = await loadBrain();
   return brain.stakeholders.map((s) => ({ slug: s.slug }));

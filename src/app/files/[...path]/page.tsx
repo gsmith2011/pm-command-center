@@ -6,6 +6,8 @@ import { PageHeader, Panel, RailLink } from "@/components/ui";
 import { Chip } from "@/components/chips";
 import { Prose } from "@/components/prose";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const brain = await loadBrain();
   return brain.files.map((f) => ({ path: f.replace(/\.md$/, "").split("/") }));

@@ -10,6 +10,8 @@ import { Prose } from "@/components/prose";
 import { Gloss, Tip } from "@/components/tip";
 import { Icons } from "@/components/icons";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const brain = await loadBrain();
   return brain.decisions.map((d) => ({ slug: d.slug }));

@@ -215,7 +215,11 @@ export default async function LoopPage() {
                               href={hrefFor(l.path)}
                               title={<span className="font-mono text-[11px]">{l.path}</span>}
                             >
-                              {l.area} · {l.label.length > 34 ? l.label.slice(0, 32) + "…" : l.label}
+                              {l.area} ·{" "}
+                              {(l.label.includes("/")
+                                ? (l.label.split("/").pop() ?? l.label).replace(/\.md$/, "")
+                                : l.label
+                              ).slice(0, 34)}
                             </Chip>
                           ))}
                         </div>

@@ -39,6 +39,9 @@ export async function Prose({
 }) {
   const brain = await loadBrain();
   const fileSet = new Set(brain.files);
+  // Backtick-wrapped citations (`[label](path)`) appear throughout the
+  // workspace; unwrap them so they render as walkable links, not code tokens.
+  const unwrapped = md.replace(/`(\[[^\]`\n]+\]\([^)`\n]+\))`/g, "$1");
   return (
     <div className={`prose-brain ${className}`}>
       <ReactMarkdown
@@ -96,7 +99,7 @@ export async function Prose({
           },
         }}
       >
-        {md}
+        {unwrapped}
       </ReactMarkdown>
     </div>
   );
