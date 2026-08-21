@@ -98,7 +98,7 @@ export default async function ReviewPage() {
                       <li key={i} className="flex items-start gap-3 px-4 py-2.5">
                         <Chip sem={SEV_META[f.severity].sem}>{SEV_META[f.severity].label}</Chip>
                         <div className="min-w-0 flex-1">
-                          <Prose md={f.md} from="INDEX.md" className="!text-[13px]" />
+                          <Prose md={f.md} from="INDEX.md" className="!text-[13.5px]" />
                         </div>
                         {f.href ? (
                           <Link
@@ -145,11 +145,11 @@ export default async function ReviewPage() {
                     log.sections.map((s) => (
                       <div key={s.title}>
                         <div className="text-eyebrow mb-1.5">{s.title}</div>
-                        <Prose md={s.md} from={log.path} className="!text-[13px]" />
+                        <Prose md={s.md} from={log.path} className="!text-[13.5px]" />
                       </div>
                     ))
                   ) : (
-                    <Prose md={log.md} from={log.path} className="!text-[13px]" />
+                    <Prose md={log.md} from={log.path} className="!text-[13.5px]" />
                   )}
                 </div>
                 </div>

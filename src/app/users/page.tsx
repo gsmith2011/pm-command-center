@@ -65,7 +65,7 @@ export default async function UsersPage() {
                   {t.relevance ? (
                     <div className="mt-3 rounded-lg bg-surface-2 px-3.5 py-2.5">
                       <div className="text-eyebrow mb-1">Why it matters now</div>
-                      <Prose md={t.relevance} from={insights.path} className="!text-[13px]" />
+                      <Prose md={t.relevance} from={insights.path} className="!text-[13.5px]" />
                     </div>
                   ) : null}
                 </Panel>
@@ -99,7 +99,7 @@ export default async function UsersPage() {
                         className="rounded-lg border border-hairline bg-surface-2/70 px-4 py-3"
                       >
                         <div className="text-eyebrow mb-1.5">{side.label}</div>
-                        <Prose md={side.md} from={insights.path} className="!text-[13px]" />
+                        <Prose md={side.md} from={insights.path} className="!text-[13.5px]" />
                         <div className="mt-2 flex flex-wrap gap-1.5">
                           {side.tags.map((t, i) => (
                             <ProvenanceChip key={i} tag={t} />
@@ -111,7 +111,7 @@ export default async function UsersPage() {
                   {c.whyPreserved ? (
                     <div className="mt-3 border-l-2 border-sem-purple/40 pl-3.5">
                       <div className="text-eyebrow mb-1 !text-sem-purple">Why both sides stay</div>
-                      <Prose md={c.whyPreserved} from={insights.path} className="!text-[13px]" />
+                      <Prose md={c.whyPreserved} from={insights.path} className="!text-[13.5px]" />
                     </div>
                   ) : null}
                 </Panel>
@@ -184,7 +184,7 @@ export default async function UsersPage() {
                     {r.title}
                   </h3>
                   <div className="mt-2.5">
-                    <Prose md={r.md} from={insights.path} className="!text-[13px]" />
+                    <Prose md={r.md} from={insights.path} className="!text-[13.5px]" />
                   </div>
                 </Panel>
               ))}

@@ -168,7 +168,7 @@ export default async function DecisionDetail({
               <ul className="space-y-2.5 border-l-2 border-hairline pl-4">
                 {d.ambiguities.map((a, i) => (
                   <li key={i}>
-                    <Prose md={a} from={d.path} className="!text-[13px]" />
+                    <Prose md={a} from={d.path} className="!text-[13.5px]" />
                   </li>
                 ))}
               </ul>
@@ -198,12 +198,12 @@ export default async function DecisionDetail({
                   {d.reversal.items.map((r, i) => (
                     <li key={i} className="flex gap-2.5">
                       <span className="font-mono text-[11px] text-sem-orange/80">{i + 1}</span>
-                      <Prose md={r} from={d.path} className="!text-[12.5px]" />
+                      <Prose md={r} from={d.path} className="!text-[13.5px]" />
                     </li>
                   ))}
                 </ol>
               ) : d.reversal.md ? (
-                <Prose md={d.reversal.md} from={d.path} className="!text-[12.5px]" />
+                <Prose md={d.reversal.md} from={d.path} className="!text-[13.5px]" />
               ) : (
                 <p className="text-[12.5px] italic text-ink-faint">
                   No reversal condition written — the schema calls this the most valuable field.
@@ -253,7 +253,7 @@ export default async function DecisionDetail({
           {d.linkedMd ? (
             <div className="rise rise-4">
               <SectionLabel>Connected</SectionLabel>
-              <Prose md={d.linkedMd} from={d.path} className="!text-[12.5px]" />
+              <Prose md={d.linkedMd} from={d.path} className="!text-[13.5px]" />
             </div>
           ) : null}
 

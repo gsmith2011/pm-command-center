@@ -19,8 +19,8 @@
 
   --color-ink: #f7f8f8;
   --color-ink-muted: #d0d6e0;
-  --color-ink-subtle: #8a8f98;
-  --color-ink-faint: #62666d;
+  --color-ink-subtle: #9ba1aa;
+  --color-ink-faint: #6e727a;
 
   --color-accent: #5e6ad2;
   --color-accent-hover: #828fff;
@@ -50,8 +50,8 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 15px;
-  line-height: 1.5;
-  letter-spacing: -0.05px;
+  line-height: 1.55;
+  letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -105,8 +105,20 @@ body {
 /* Prose — rendered markdown from the brain */
 .prose-brain {
   color: var(--color-ink-muted);
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+/* Readability: cap running-text line length (~68ch) so long-form knowledge
+   pages don't run edge-to-edge. Tables/wide content stay full width. */
+.prose-brain > p,
+.prose-brain > ul,
+.prose-brain > ol,
+.prose-brain > blockquote,
+.prose-brain > h1,
+.prose-brain > h2,
+.prose-brain > h3,
+.prose-brain > h4 {
+  max-width: 68ch;
 }
 .prose-brain p + p,
 .prose-brain ul + p,

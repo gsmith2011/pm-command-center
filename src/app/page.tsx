@@ -158,7 +158,7 @@ export default async function Overview() {
                           ) : null}
                         </div>
                         <div className="mt-1">
-                          <Prose md={bodyMd} from="INDEX.md" className="!text-[13px]" />
+                          <Prose md={bodyMd} from="INDEX.md" className="!text-[13.5px]" />
                         </div>
                       </div>
                       {f.href ? (
