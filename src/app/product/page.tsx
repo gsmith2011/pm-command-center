@@ -57,7 +57,7 @@ export default async function ProductPage() {
                       <Prose
                         md={activation.current ?? ""}
                         from={m.path}
-                        className="!text-[12.5px]"
+                        className="!text-[13.5px]"
                       />
                     </div>
                     {activation.watchItems.map((w, i) => (
@@ -69,7 +69,7 @@ export default async function ProductPage() {
                           <span className="text-eyebrow !text-sem-yellow">watch item</span>
                         </Gloss>
                         <div className="mt-1">
-                          <Prose md={w} from={m.path} className="!text-[12.5px]" />
+                          <Prose md={w} from={m.path} className="!text-[13.5px]" />
                         </div>
                       </div>
                     ))}
@@ -103,7 +103,7 @@ export default async function ProductPage() {
                                 </span>
                               </span>
                             ) : (
-                              <Prose md={s.current ?? ""} from={m.path} className="!text-[12.5px]" />
+                              <Prose md={s.current ?? ""} from={m.path} className="!text-[13.5px]" />
                             )}
                           </td>
                           <td className="max-w-[280px] px-4 py-2.5 text-ink-subtle">
@@ -113,7 +113,7 @@ export default async function ProductPage() {
                               <Prose
                                 md={s.definition ?? "—"}
                                 from={m.path}
-                                className="!text-[12.5px]"
+                                className="!text-[13.5px]"
                               />
                             )}
                           </td>
@@ -133,7 +133,7 @@ export default async function ProductPage() {
                   <ul className="space-y-2">
                     {m.recentMovements.map((mv, i) => (
                       <li key={i} className="panel px-4 py-2.5">
-                        <Prose md={mv} from={m.path} className="!text-[13px]" />
+                        <Prose md={mv} from={m.path} className="!text-[13.5px]" />
                       </li>
                     ))}
                   </ul>
@@ -196,7 +196,7 @@ export default async function ProductPage() {
                             key={i}
                             md={it.md}
                             from="knowledge/product/roadmap.md"
-                            className="!text-[12.5px]"
+                            className="!text-[13.5px]"
                           />
                         ))
                       ) : (

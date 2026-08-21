@@ -147,7 +147,7 @@ export default async function HypothesisDetail({
                           <ul className="space-y-2.5 border-l-2 border-hairline pl-4">
                             {h.openQuestions.map((q, i) => (
                               <li key={i}>
-                                <Prose md={q} from={file.path} className="!text-[13px]" />
+                                <Prose md={q} from={file.path} className="!text-[13.5px]" />
                               </li>
                             ))}
                           </ul>
@@ -158,7 +158,7 @@ export default async function HypothesisDetail({
                         {h.test ? (
                           <div className="rounded-lg bg-surface-2 px-3.5 py-2.5">
                             <div className="text-eyebrow mb-1">Test</div>
-                            <Prose md={h.test} from={file.path} className="!text-[12.5px]" />
+                            <Prose md={h.test} from={file.path} className="!text-[13.5px]" />
                           </div>
                         ) : null}
                         {h.decisionTrigger ? (
@@ -172,7 +172,7 @@ export default async function HypothesisDetail({
                             <Prose
                               md={h.decisionTrigger}
                               from={file.path}
-                              className="!text-[12.5px]"
+                              className="!text-[13.5px]"
                             />
                           </div>
                         ) : null}
@@ -181,7 +181,7 @@ export default async function HypothesisDetail({
                       {h.resolution ? (
                         <div className="mt-4 rounded-lg border border-sem-green/25 bg-sem-green/[0.05] px-3.5 py-2.5">
                           <div className="text-eyebrow mb-1 !text-sem-green">Resolution</div>
-                          <Prose md={h.resolution} from={file.path} className="!text-[13px]" />
+                          <Prose md={h.resolution} from={file.path} className="!text-[13.5px]" />
                         </div>
                       ) : null}
                       </div>
