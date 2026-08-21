@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
-import { Shell } from "@/components/shell";
 import { TipProvider } from "@/components/tip";
 
 export const metadata: Metadata = {
@@ -20,9 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
-        <TipProvider>
-          <Shell>{children}</Shell>
-        </TipProvider>
+        <TipProvider>{children}</TipProvider>
       </body>
     </html>
   );
