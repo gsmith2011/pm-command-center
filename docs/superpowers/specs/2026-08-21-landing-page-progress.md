@@ -1,7 +1,7 @@
 # Landing page — progress & handoff
 
-**Updated:** 2026-08-21
-**Branch:** `landing-page` (6 commits ahead of `main`; **not pushed, not deployed**)
+**Updated:** 2026-08-22
+**Branch:** `landing-page` (8 commits ahead of `main`; **not pushed, not deployed**)
 **Design spec:** [2026-08-21-landing-page-refresh-design.md](./2026-08-21-landing-page-refresh-design.md)
 
 ## Where to begin (new session)
@@ -31,12 +31,37 @@ Run it: `npm run dev`, then open `http://localhost:3000/` (landing) and `/overvi
 
 ## Verified
 - `next build` passes (97/97 pages), ESLint clean, no runtime console errors (dev-only HMR
-  socket noise aside).
+  socket noise aside). Re-verified 2026-08-22 after the design-review fixes below.
 - **WCAG AA** across the light palette — measured on the running app (CTAs 6.39, act text 6.22,
-  faint 4.88, semantic tags ≥4.5).
+  semantic tags ≥4.5). `--ink-faint` was `#6b7180` = 4.88 on white but only **4.40 on the tinted
+  `--surface-2`** (below AA for the 10–11.5px labels that sit on it); darkened to `#636978`
+  (4.95 on surface-2 / 5.49 on white) in the 2026-08-22 pass.
 - **Real 375–390px mobile:** no horizontal overflow, nav fixed, every section stacks cleanly.
 
+## Design-review pass — 2026-08-22 (ui-ux-pro-max)
+End-to-end review against the `ui-ux-pro-max` skill (page maps to its **Trust & Authority +
+Funnel-3-step** landing pattern and **Swiss/minimal, clean-white, single-accent** style rec for a
+markdown/dev tool — both confirmed a good fit). Four fixes applied:
+1. **FAQ entity bug (real defect):** the "What's it built on?" question was a bare JS string
+   containing `&rsquo;`, so it rendered the literal `What&rsquo;s it built on?`. Replaced with a
+   real apostrophe. It was the *only* such case — all other `&entity;` usages are in JSX or set
+   via `innerHTML` and decode fine. `LandingClient.tsx`.
+2. **Faint contrast → AA:** `--ink-faint` darkened `#6b7180` → `#636978` (see Verified). `landing.css`.
+3. **Hero "more below" cue:** added a decorative, `aria-hidden`, motion-guarded down-chevron
+   (`Ic.chev` + `.lp-hero-cue`) below the hero — the skill's hero rule flags "don't hide the next
+   content cue"; the first fold previously ended flat on the assurance row. Hidden when the hero
+   stacks (<940px). `LandingClient.tsx` + `landing.css`.
+4. **Mobile nav touch target:** the "Live demo" button was ~34px tall; added `min-height: 44px`
+   (+ padding) to clear the 44×44 minimum. `landing.css`.
+
+Reviewed but **not** changed (owner's call): CTA label repeats identically 4× / no GitHub CTA in
+nav; desktop `<h1>` wraps to 4 lines; the 28px regen button in the brief card is still under 44px
+(scoped out — it's a desktop-hover affordance).
+
 ## Commit history (on `landing-page`, newest first)
+- design-review pass: FAQ entity fix, faint→AA on surface-2, hero scroll cue, mobile nav touch
+  target (this commit; also carries this doc update)
+- `fc0b905` docs: landing page progress + handoff
 - `3ee4d74` mobile pass + credibility band + motion polish
 - `824873e` v2: problem-led hero, 3-act narrative, denser + de-slopped
 - `33c7c3b` polish: fix CTA contrast, de-slop, balance, clarity

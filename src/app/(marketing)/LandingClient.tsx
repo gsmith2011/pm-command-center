@@ -307,6 +307,9 @@ export default function LandingClient() {
             </div>
           </div>
         </div>
+        <div className="lp-hero-cue" aria-hidden="true">
+          <Ic.chev />
+        </div>
       </header>
 
       {/* clarity band — lead with the problem */}
@@ -486,7 +489,7 @@ export default function LandingClient() {
               ["Does it change my files?", <>No. It&rsquo;s read-only &mdash; it renders your markdown and never writes to your workspace.</>],
               ["Where does my data go?", <>Nowhere. It reads the folder on your machine. Nothing is uploaded.</>],
               ["Can I point it at my own workspace?", <>Yes. Set <code>BRAIN_DIR</code> in <code>.env.local</code> to your PM Brain folder. The demo runs on a frozen snapshot.</>],
-              ["What&rsquo;s it built on?", <>PM Brain OS, an open-source system for keeping product thinking as markdown. This is the visual layer on top.</>],
+              ["What’s it built on?", <>PM Brain OS, an open-source system for keeping product thinking as markdown. This is the visual layer on top.</>],
               ["Is the demo real?", <>The data isn&rsquo;t. It runs on Flo, a fictional company &mdash; real structure, invented names, quotes, and metrics.</>],
             ].map(([q, a], i) => (
               <details className="lp-q" key={i}>
@@ -554,5 +557,8 @@ const Ic = {
   ),
   slash: () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M5.6 5.6l12.8 12.8" /></svg>
+  ),
+  chev: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
   ),
 };

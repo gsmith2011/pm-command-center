@@ -12,7 +12,7 @@
   --ink: #15171e;
   --ink-soft: #3b414f;
   --ink-muted: #5a6170;
-  --ink-faint: #6b7180;
+  --ink-faint: #636978;  /* AA on surface-2 (4.95:1) and white (5.49:1); stays lighter than --ink-muted */
   --line: #e6e8f0;
   --line-strong: #d4d8e4;
 
@@ -108,6 +108,12 @@
 .lp-assure { display: flex; gap: 18px; margin-top: 24px; font-size: 12.5px; color: var(--ink-muted); flex-wrap: wrap; }
 .lp-assure span { display: flex; align-items: center; gap: 7px; }
 .lp-check { width: 15px; height: 15px; flex: none; color: var(--accent); }
+
+/* hero "more below" cue — decorative, static under reduced motion, hidden when stacked */
+.lp-hero-cue { position: relative; z-index: 1; display: flex; justify-content: center; margin-top: 40px; color: var(--ink-faint); }
+.lp-hero-cue svg { animation: lp-bob 1.9s ease-in-out infinite; }
+@keyframes lp-bob { 0%, 100% { transform: translateY(0); opacity: .5; } 50% { transform: translateY(4px); opacity: 1; } }
+@media (max-width: 940px) { .lp-hero-cue { display: none; } }
 
 /* brief card */
 .lp-brief { position: relative; background: var(--surface); border: 1px solid var(--line);
@@ -373,7 +379,7 @@
   .lp-nav-in { height: 56px; }
   .lp-brand { font-size: 14px; }
   .lp-brand small { display: none; }
-  .lp .lp-nav-right .lp-btn-accent { padding: 8px 13px; font-size: 13.5px; }
+  .lp .lp-nav-right .lp-btn-accent { padding: 10px 14px; font-size: 13.5px; min-height: 44px; }
   .lp-hero { padding: 34px 0 30px; }
   .lp-sec { padding: 44px 0; }
   .lp-clarity .lp-sec { padding: 40px 0; }
