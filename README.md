@@ -1,9 +1,9 @@
 # PM Command Center
 
-A dashboard for a [PM Brain](https://github.com/phuryn/pm-brain) — it reads a folder of
-plain-markdown product thinking (beliefs, evidence, decisions, disagreements) and lays it
-out as one legible screen, so you can take in the whole picture instead of piecing it
-together file by file.
+A dashboard for a [PM Brain](https://github.com/phuryn/pm-brain) — a product manager's
+strategy, hypotheses, decisions, and user evidence, kept as plain markdown files in a
+folder. The dashboard reads that folder and lays the whole picture out on one screen, so
+you can see the state of your thinking at a glance instead of opening files one at a time.
 
 ![Mission control — what needs you, what's moving](docs/media/overview.png)
 
@@ -14,34 +14,46 @@ together file by file.
 
 ## The problem
 
-PM Brain is deliberately headless: your strategy, hypotheses, decision records, and
-interview evidence live as markdown in a repo, operated through Claude Code commands.
-That's the right storage model — inspectable, versioned, no lock-in — but reading the
-*state of your own thinking* means walking directories and diffing your memory against
-INDEX files. The system runs on a loop (ingest → synthesize → propagate → tag → sweep),
-and none of that motion is visible in a file tree.
+PM Brain keeps everything as text on purpose: your strategy, hypotheses, decision
+records, and interview evidence live as markdown in a git repo, and you operate on them
+through Claude Code commands. That's the right storage model — everything is inspectable,
+versioned, and free of vendor lock-in — but it has no screen of its own. Reading the
+*state of your own thinking* means opening directories one by one and checking your
+memory against index files. And the system is always in motion: new input comes in, gets
+synthesized, ripples out to the files it affects, gets tagged, and is swept for problems
+each week — none of which a plain folder shows you.
 
 ## What it does
 
-- **Makes the loop visible.** A dedicated view shows the five-stage cycle with live
-  counts, and lets you follow any single artifact through it: verbatim source →
-  synthesized record → every file it actually changed, each hop a real citation.
-- **Makes claims walkable.** Every evidence row wears a typed provenance chip
-  (synthesized record / raw source / heard verbally / PM intuition / industry background
-  / chat-only / **untagged**). Click a chip, land on the artifact, see who else cites it.
-- **Keeps disagreement visible.** Evidence-for and evidence-against render as two sides;
-  preserved contradictions stay two-sided; a rejected explanation stays on the page with
-  its revival condition, so it isn't re-litigated.
-- **Elevates reversal conditions.** Decision records show "what would reverse this" as a
-  first-class panel with forcing dates — including the decided-but-blocked nuance in the
-  record's own words.
-- **Watches health continuously.** The weekly sweep's checks (staleness, decision debt,
-  relationship cadence, link rot, untagged claims, INDEX drift) are recomputed from the
-  files on every load. Drift between an index and its files is *surfaced*, not silently
-  fixed — same ethos as the brain itself.
-- **Renders honestly at every fill level.** Empty areas answer three questions: what
-  lives here, why it's empty, and the command that fills it. A pointer to a file that
-  doesn't exist yet renders as exactly that.
+Each view below answers a question a folder of files can't.
+
+- **Shows the work cycle at a glance.** PM Brain runs on a repeating five-stage cycle —
+  take in a new input, synthesize it, push the result out to the files it changes, tag
+  it, and sweep for problems. A dedicated view shows all five stages with live counts,
+  and lets you follow any single input through the whole cycle: the word-for-word
+  source → the synthesized record → every file it actually changed, each step a real
+  link you can click.
+- **Traces every claim back to its source.** Each piece of evidence carries a small label
+  showing where it came from (a synthesized record / a raw source / heard in conversation
+  / the PM's own read / general industry knowledge / a chat with no written record /
+  **untagged**). Click the label, land on the source, and see who else relies on it.
+- **Keeps disagreement visible.** Evidence for and evidence against sit side by side;
+  genuine contradictions stay shown as two sides; an explanation that was ruled out stays
+  on the page along with the condition that would put it back in play, so it isn't
+  re-argued from scratch.
+- **Surfaces what would change a decision.** Every decision record shows "what would
+  reverse this" as its own panel, including any date by which the call has to be made —
+  and captures the in-between cases too, like a decision that's been made but is still
+  blocked, in the record's own words.
+- **Watches for problems continuously.** Every week, PM Brain runs a health sweep; the
+  dashboard re-runs those same checks on every page load — notes going stale, decisions
+  left open too long, key relationships going quiet, broken internal links, claims with
+  no source label, and indexes that no longer match their files. When an index disagrees
+  with the actual files, the dashboard *shows* the mismatch rather than quietly fixing
+  it — the same principle the brain itself follows.
+- **Looks right whether the folder is full or nearly empty.** An empty area answers three
+  questions: what belongs here, why it's empty right now, and the command that fills it. A
+  link pointing to a file that doesn't exist yet is shown as exactly that.
 
 More screens: [the loop](docs/media/loop.png) ·
 [hypothesis detail](docs/media/hypothesis-detail.png) ·
@@ -72,11 +84,11 @@ times on the deployed site anchor to that sync date.
 
 No frontmatter, no sidecar database, no changes to the workspace. The parser
 (`src/lib/brain/`) reads the brain's own conventions from markdown structure: schema
-sections, status lines, the six provenance tag shapes (including backtick-wrapped and
-bare-bracket citations), and relative links. From those it derives the link/backlink
-graph, a dated event stream (ingests, promotions, decisions, sweeps), and the health
-findings. Anything it can't parse structurally still renders as prose through a
-universal file viewer, so no file in the workspace is unreachable.
+sections, status lines, the six source-label (provenance) formats it recognizes
+(including backtick-wrapped and bare-bracket citations), and relative links. From those
+it derives the link/backlink graph, a dated event stream (ingests, promotions, decisions,
+sweeps), and the health findings. Anything it can't parse structurally still renders as
+prose through a universal file viewer, so no file in the workspace is unreachable.
 
 ## Decisions & tradeoffs
 
@@ -103,7 +115,7 @@ universal file viewer, so no file in the workspace is unreachable.
 | | Status |
 |---|---|
 | All read surfaces: overview, loop, hypotheses, decisions, stakeholders, knowledge areas, ingestion feed, review/health, artifact viewer | **Built** |
-| Provenance chips, walkable audit trail, backlinks, contested evidence, reversal conditions, always-on health checks, event stream | **Built** |
+| Source labels, click-through audit trail, backlinks, contested evidence, reversal conditions, always-on health checks, event stream | **Built** |
 | Empty-state handling for sparse/greenfield workspaces | **Built** |
 | ⌘K jump (titles/names only) | **Built** — basic by design |
 | Command execution from the dashboard (`/review`, `/ingest`, …) — localhost-only, shells out to the `claude` CLI, command-agnostic | **Planned** — [PHASE-2-PLAN.md](PHASE-2-PLAN.md) |

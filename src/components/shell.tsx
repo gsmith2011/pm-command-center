@@ -16,7 +16,7 @@ export async function Shell({ children }: { children: React.ReactNode }) {
       {
         group: null,
         items: [
-          { href: "/", label: "Overview" },
+          { href: "/overview", label: "Overview" },
           { href: "/loop", label: "The Loop" },
         ],
       },
@@ -50,7 +50,7 @@ export async function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
       <aside className="fixed inset-y-0 left-0 z-40 flex w-[256px] flex-col border-r border-hairline bg-canvas">
-        <Link href="/" className="flex items-center gap-2.5 px-4 pb-4 pt-5">
+        <Link href="/overview" className="flex items-center gap-2.5 px-4 pb-4 pt-5">
           <span className="flex h-6 w-6 items-center justify-center rounded-md bg-accent/90 text-white">
             <Icons.loop width={13} height={13} />
           </span>
