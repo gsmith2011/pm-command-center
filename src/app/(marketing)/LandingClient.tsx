@@ -186,12 +186,11 @@ export default function LandingClient() {
       {/* hero */}
       <header className="lp-hero">
         <div className="lp-grid-bg" />
-        <div className="lp-aura" />
         <div className="lp-wrap lp-hero-grid">
           <div>
             <span className="lp-pill lp-reveal">
               <span className="lp-dot" />
-              Built on PM Brain OS
+              A command center for product managers
             </span>
             <h1 className="lp-h1 lp-reveal" style={{ ["--d" as string]: ".05s" }}>
               See where your product thinking stands, <span className="lp-accent">on one screen.</span>
@@ -316,8 +315,8 @@ export default function LandingClient() {
       <section className="lp-sec">
         <div className="lp-wrap">
           <div className="lp-sec-head lp-reveal">
-            <div className="lp-kick">Why it earns the screen</div>
-            <h2 className="lp-h2">What you actually get out of it.</h2>
+            <div className="lp-kick">Outcomes</div>
+            <h2 className="lp-h2">What you get out of it.</h2>
           </div>
           <div className="lp-benefits">
             {[
@@ -351,19 +350,25 @@ export default function LandingClient() {
       <section className="lp-sec" id="surfaces">
         <div className="lp-wrap">
           <div className="lp-sec-head lp-reveal">
-            <div className="lp-kick">The surfaces</div>
-            <h2 className="lp-h2">Six views of the same truth &mdash; each answers a question you&rsquo;d otherwise hold in your head.</h2>
-            <p>Not a dashboard of vanity metrics. A working memory that stays honest: one home for every fact, provenance on every claim, and disagreements kept in the open.</p>
+            <div className="lp-kick">What&rsquo;s inside</div>
+            <h2 className="lp-h2">Everything you&rsquo;re tracking, in one place.</h2>
+            <p>Not a dashboard of vanity metrics &mdash; a working memory that stays honest: one home for every fact, provenance on every claim, and disagreements kept in the open.</p>
           </div>
           <div className="lp-bento">
             <div className="lp-card lp-c4 lp-reveal">
               <div className="lp-card-ic"><Ic.chart /></div>
               <h3>Hypotheses, weighed by evidence</h3>
-              <p>Each belief shows what supports it, what argues against it, and how confident you should be. One fresh anecdote never tips the scale.</p>
-              <div className="lp-bars">
-                <div className="lp-bar-row"><span className="lp-bar-k lp-mono">Field-map</span><span className="lp-bar"><i style={{ ["--w" as string]: "72%" }} /></span></div>
-                <div className="lp-bar-row"><span className="lp-bar-k lp-mono">Sync-heal</span><span className="lp-bar"><i style={{ ["--w" as string]: "88%" }} /></span></div>
-                <div className="lp-bar-row"><span className="lp-bar-k lp-mono">Notif-load</span><span className="lp-bar"><i style={{ ["--w" as string]: "34%" }} /></span></div>
+              <p>Each belief shows what supports it, what argues against it, and how confident you should be &mdash; so one fresh anecdote never tips the scale.</p>
+              <div className="lp-hyp">
+                <div className="lp-hyp-title">&ldquo;Sync breaks when Salesforce fields get remapped&rdquo;</div>
+                <div className="lp-hyp-split">
+                  <span className="lp-hyp-for" style={{ flex: 4 }} />
+                  <span className="lp-hyp-against" style={{ flex: 1 }} />
+                </div>
+                <div className="lp-hyp-meta">
+                  <span className="lp-hyp-legend"><b>4</b> for &middot; <b>1</b> against</span>
+                  <span className="lp-conf">Medium confidence</span>
+                </div>
               </div>
             </div>
 
@@ -371,6 +376,9 @@ export default function LandingClient() {
               <div className="lp-card-ic"><Ic.checkSq /></div>
               <h3>Decisions that keep their receipts</h3>
               <p>Every record carries its evidence, its status, and the condition that would reverse it.</p>
+              <div className="lp-mini-callout">
+                <span className="lp-mini-k">Reverses if</span>sync error rate climbs back over 2%
+              </div>
             </div>
 
             <div className="lp-card lp-c3 lp-reveal">
@@ -396,18 +404,29 @@ export default function LandingClient() {
               <div className="lp-card-ic"><Ic.clock /></div>
               <h3>Strategy tensions, kept in the open</h3>
               <p>When a weak signal collides with a committed bet, the conflict is surfaced and escalated, not quietly resolved.</p>
+              <div className="lp-mini-callout lp-mini-warn">
+                <span className="lp-mini-k">Open</span>
+                <code>T1</code> &middot; resourcing &middot; forcing 2026-07-28
+              </div>
             </div>
 
             <div className="lp-card lp-c2 lp-reveal">
               <div className="lp-card-ic"><Ic.list /></div>
               <h3>The ingestion feed</h3>
               <p>New input lands here first, and is only promoted once it recurs.</p>
+              <div className="lp-mini-feed">
+                <div><span className="lp-mini-dot" /><b>Interview</b> &middot; Salesforce sync friction</div>
+                <div><span className="lp-mini-dot" /><b>Exit survey</b> &middot; notification overload</div>
+              </div>
             </div>
 
             <div className="lp-card lp-c4 lp-reveal" style={{ ["--d" as string]: ".07s" }}>
               <div className="lp-card-ic"><Ic.activity /></div>
               <h3>A weekly health check</h3>
               <p>Broken links, stale notes, untagged claims, drifting indexes &mdash; caught automatically, every week, and surfaced rather than silently fixed.</p>
+              <div className="lp-mini-callout">
+                <span className="lp-mini-k">Last sweep</span>2 stale notes &middot; 1 untagged claim &middot; indexes clean
+              </div>
             </div>
           </div>
         </div>
