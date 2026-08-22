@@ -49,6 +49,19 @@ export default function LandingClient() {
       revs.forEach((el) => io!.observe(el));
     }
 
+    // cursor spotlight on the act rows (fine pointers only)
+    let acts: HTMLElement[] = [];
+    const onMove = (e: MouseEvent) => {
+      const card = e.currentTarget as HTMLElement;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      card.style.setProperty("--my", `${e.clientY - r.top}px`);
+    };
+    if (!reduce && window.matchMedia("(pointer: fine)").matches) {
+      acts = Array.from(document.querySelectorAll<HTMLElement>(".lp-act"));
+      acts.forEach((c) => c.addEventListener("mousemove", onMove));
+    }
+
     const summary = summaryRef.current;
     const scan = scanRef.current;
     const scanFill = scan?.querySelector("i") as HTMLElement | null;
@@ -149,6 +162,7 @@ export default function LandingClient() {
       io?.disconnect();
       bio?.disconnect();
       regen?.removeEventListener("click", onRegen);
+      acts.forEach((c) => c.removeEventListener("mousemove", onMove));
     };
   }, []);
 
@@ -173,7 +187,8 @@ export default function LandingClient() {
               <a href="#faq">FAQ</a>
             </div>
             <a className="lp-btn lp-btn-accent" href={APP}>
-              Open the live demo
+              <span className="lp-hide-sm">Open the live demo</span>
+              <span className="lp-show-sm">Live demo</span>
             </a>
           </div>
         </div>
@@ -308,6 +323,19 @@ export default function LandingClient() {
               Center reads that folder and puts the whole picture on one screen &mdash; so the
               state of your thinking is something you can see, not something you have to remember.
             </p>
+            <div className="lp-cred">
+              <span className="lp-cred-item"><Ic.code /> Open source, MIT</span>
+              <span className="lp-cred-item"><Ic.lock /> Runs on your machine</span>
+              <span className="lp-cred-item"><Ic.slash /> No account, no telemetry</span>
+              <a
+                className="lp-cred-link"
+                href="https://github.com/phuryn/pm-brain"
+                target="_blank"
+                rel="noreferrer"
+              >
+                See the source <Ic.arrow />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -517,5 +545,14 @@ const Ic = {
   ),
   folder: () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" /></svg>
+  ),
+  code: () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6" /></svg>
+  ),
+  lock: () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 018 0v4" /></svg>
+  ),
+  slash: () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M5.6 5.6l12.8 12.8" /></svg>
   ),
 };
