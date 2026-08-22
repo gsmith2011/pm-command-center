@@ -25,13 +25,11 @@ export default function LandingClient() {
       return id;
     };
 
-    // nav shadow
     const nav = navRef.current;
     const onScroll = () => nav?.classList.toggle("lp-stuck", window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // reveals
     const revs = Array.from(document.querySelectorAll<HTMLElement>(".lp-reveal"));
     let io: IntersectionObserver | null = null;
     if (reduce || !("IntersectionObserver" in window)) {
@@ -51,7 +49,6 @@ export default function LandingClient() {
       revs.forEach((el) => io!.observe(el));
     }
 
-    // brief assembly
     const summary = summaryRef.current;
     const scan = scanRef.current;
     const scanFill = scan?.querySelector("i") as HTMLElement | null;
@@ -121,7 +118,6 @@ export default function LandingClient() {
       };
     };
 
-    // kick off brief when it scrolls into view (once)
     let started = false;
     let bio: IntersectionObserver | null = null;
     const briefEl = document.getElementById("lp-brief");
@@ -172,8 +168,8 @@ export default function LandingClient() {
           </div>
           <div className="lp-nav-right">
             <div className="lp-nav-links">
-              <a href="#surfaces">Surfaces</a>
-              <a href="#how">How it works</a>
+              <a href="#inside">What it does</a>
+              <a href="#trust">Trust</a>
               <a href="#faq">FAQ</a>
             </div>
             <a className="lp-btn lp-btn-accent" href={APP}>
@@ -204,8 +200,8 @@ export default function LandingClient() {
               <a className="lp-btn lp-btn-accent lp-btn-lg" href={APP}>
                 Open the live demo &rarr;
               </a>
-              <a className="lp-textlink" href="#how">
-                See how it works
+              <a className="lp-textlink" href="#inside">
+                See what it does
               </a>
             </div>
             <div className="lp-assure lp-reveal" style={{ ["--d" as string]: ".26s" }}>
@@ -253,12 +249,12 @@ export default function LandingClient() {
                   <span className="lp-stripe lp-s-crit" />
                   <div className="lp-item-main">
                     <div className="lp-item-top">
-                      <b>Resourcing tension is time-boxed</b>
+                      <b>A decision is coming due</b>
                       <span className="lp-tag lp-t-crit lp-mono">Decision due</span>
                     </div>
                     <div className="lp-item-desc">
-                      <code>T1</code> forces on <b>2026-07-28</b> &mdash; sync-health build vs.
-                      onboarding staffing. Open pending leadership sign-off.
+                      The build-vs-staffing tradeoff you flagged forces a call in <b>5 days</b>,
+                      and it&rsquo;s still open.
                     </div>
                   </div>
                 </div>
@@ -266,11 +262,11 @@ export default function LandingClient() {
                   <span className="lp-stripe lp-s-warn" />
                   <div className="lp-item-main">
                     <div className="lp-item-top">
-                      <b>Relationship debt with Jordan</b>
+                      <b>A key relationship has gone quiet</b>
                       <span className="lp-tag lp-t-warn lp-mono">28d cold</span>
                     </div>
                     <div className="lp-item-desc">
-                      High-influence, high-friction, and untouched since the roadmap cut.
+                      Jordan is high-influence and hasn&rsquo;t been touched since the roadmap cut.
                     </div>
                   </div>
                 </div>
@@ -278,12 +274,11 @@ export default function LandingClient() {
                   <span className="lp-stripe lp-s-good" />
                   <div className="lp-item-main">
                     <div className="lp-item-top">
-                      <b>Field-mapping hypothesis is gaining ground</b>
+                      <b>A hunch just got stronger</b>
                       <span className="lp-tag lp-t-good lp-mono">New evidence</span>
                     </div>
                     <div className="lp-item-desc">
-                      3 mid-market interviews now point the same way. Promote to{" "}
-                      <code>insights.md</code>?
+                      Three interviews now point the same way &mdash; worth promoting to a belief.
                     </div>
                   </div>
                 </div>
@@ -299,175 +294,135 @@ export default function LandingClient() {
         </div>
       </header>
 
-      {/* clarity band */}
+      {/* clarity band — lead with the problem */}
       <section className="lp-clarity">
         <div className="lp-wrap lp-sec">
-          <p className="lp-reveal">
-            Your thinking already lives in a folder. PM Brain keeps your strategy, hypotheses,
-            decisions, and interview notes as plain markdown. <b>PM Command Center reads that
-            folder and shows the whole picture on one screen</b>, so you stop reconstructing it
-            file by file.
-          </p>
-        </div>
-      </section>
-
-      {/* benefits */}
-      <section className="lp-sec">
-        <div className="lp-wrap">
-          <div className="lp-sec-head lp-reveal">
-            <div className="lp-kick">Outcomes</div>
-            <h2 className="lp-h2">What you get out of it.</h2>
-          </div>
-          <div className="lp-benefits">
-            {[
-              {
-                icon: <Ic.bell />,
-                h: "Walk into Monday knowing what needs your attention.",
-                p: "A standing sweep flags forcing dates, decisions left open too long, and relationships going quiet — while there’s still time to act.",
-              },
-              {
-                icon: <Ic.rotate />,
-                h: "Stop re-arguing settled calls.",
-                p: "Every decision keeps its evidence and the one condition that would reverse it. Options you ruled out stay on the page, so they don’t come back around.",
-              },
-              {
-                icon: <Ic.shield />,
-                h: "Trust what you’re reading.",
-                p: "Every claim links back to where it came from, and real disagreement stays visible instead of being averaged away.",
-              },
-            ].map((b, i) => (
-              <div className="lp-benefit lp-reveal" key={i} style={{ ["--d" as string]: `${i * 0.07}s` }}>
-                <div className="lp-benefit-ic">{b.icon}</div>
-                <h3>{b.h}</h3>
-                <p>{b.p}</p>
-              </div>
-            ))}
+          <div className="lp-clarity-in lp-reveal">
+            <p className="lp-clarity-lead">
+              Your strategy is in a doc. Decisions are in Slack threads. Research is in a folder
+              somewhere. <b>Six weeks later, you can&rsquo;t reconstruct why you chose what you
+              chose.</b>
+            </p>
+            <p className="lp-clarity-sub">
+              PM Brain fixes that by keeping all of it as plain markdown in one folder. PM Command
+              Center reads that folder and puts the whole picture on one screen &mdash; so the
+              state of your thinking is something you can see, not something you have to remember.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* surfaces */}
-      <section className="lp-sec" id="surfaces">
+      {/* what it does — 3-act narrative */}
+      <section className="lp-sec" id="inside">
         <div className="lp-wrap">
           <div className="lp-sec-head lp-reveal">
-            <div className="lp-kick">What&rsquo;s inside</div>
-            <h2 className="lp-h2">Everything you&rsquo;re tracking, in one place.</h2>
-            <p>Not a dashboard of vanity metrics &mdash; a working memory that stays honest: one home for every fact, provenance on every claim, and disagreements kept in the open.</p>
+            <div className="lp-kick">What it does</div>
+            <h2 className="lp-h2">From scattered notes to a decision you can defend.</h2>
           </div>
-          <div className="lp-bento">
-            <div className="lp-card lp-c4 lp-reveal">
-              <div className="lp-card-ic"><Ic.chart /></div>
-              <h3>Hypotheses, weighed by evidence</h3>
-              <p>Each belief shows what supports it, what argues against it, and how confident you should be &mdash; so one fresh anecdote never tips the scale.</p>
-              <div className="lp-hyp">
-                <div className="lp-hyp-title">&ldquo;Sync breaks when Salesforce fields get remapped&rdquo;</div>
-                <div className="lp-hyp-split">
-                  <span className="lp-hyp-for" style={{ flex: 4 }} />
-                  <span className="lp-hyp-against" style={{ flex: 1 }} />
+
+          <div className="lp-acts">
+            {/* Act 1 */}
+            <div className="lp-act lp-reveal">
+              <div className="lp-act-text">
+                <span className="lp-act-n lp-mono">01</span>
+                <h3>Bring the whole picture together.</h3>
+                <p>
+                  Strategy, decisions, research, and stakeholder notes usually live in five
+                  different tools. PM Command Center reads them from a single folder of plain
+                  markdown and keeps them current &mdash; every new input synthesized,
+                  cross-linked, and swept for problems each week.
+                </p>
+              </div>
+              <div className="lp-act-visual">
+                <div className="lp-unify">
+                  <div className="lp-unify-src">
+                    <span>Interviews</span>
+                    <span>Slack</span>
+                    <span>Docs</span>
+                    <span>Analytics</span>
+                  </div>
+                  <div className="lp-unify-mid"><Ic.arrow /></div>
+                  <div className="lp-unify-out">
+                    <Ic.folder />
+                    One folder, one screen
+                  </div>
                 </div>
-                <div className="lp-hyp-meta">
-                  <span className="lp-hyp-legend"><b>4</b> for &middot; <b>1</b> against</span>
-                  <span className="lp-conf">Medium confidence</span>
+              </div>
+            </div>
+
+            {/* Act 2 — visual left, text right */}
+            <div className="lp-act lp-act-rev lp-reveal">
+              <div className="lp-act-visual">
+                <div className="lp-hyp lp-hyp-lg">
+                  <div className="lp-hyp-title">&ldquo;Sync breaks when Salesforce fields get remapped&rdquo;</div>
+                  <div className="lp-hyp-split">
+                    <span className="lp-hyp-for" style={{ flex: 4 }} />
+                    <span className="lp-hyp-against" style={{ flex: 1 }} />
+                  </div>
+                  <div className="lp-hyp-meta">
+                    <span className="lp-hyp-legend"><b>4</b> interviews for &middot; <b>1</b> against</span>
+                    <span className="lp-conf">Medium confidence</span>
+                  </div>
+                  <div className="lp-hyp-src">
+                    <span className="lp-mini-k">Source</span>every point traces back to the interview it came from
+                  </div>
+                </div>
+              </div>
+              <div className="lp-act-text">
+                <span className="lp-act-n lp-mono">02</span>
+                <h3>Keep every claim honest.</h3>
+                <p>
+                  Every claim carries a source you can click back to. Beliefs show the evidence
+                  for and against side by side, so confidence reflects what has actually been
+                  tested. And when a weak signal collides with a committed bet &mdash; say,{" "}
+                  <i>ship the sync fix, or staff onboarding?</i> &mdash; the tradeoff is named and
+                  escalated, not quietly buried.
+                </p>
+              </div>
+            </div>
+
+            {/* Act 3 */}
+            <div className="lp-act lp-reveal">
+              <div className="lp-act-text">
+                <span className="lp-act-n lp-mono">03</span>
+                <h3>Start the week a step ahead.</h3>
+                <p>
+                  A standing sweep pulls the few things that need you to the top &mdash; a
+                  decision past due, a deadline this week, a key relationship gone quiet &mdash;
+                  each with the receipts attached. And every decision keeps the one condition that
+                  would change it, so calls you&rsquo;ve made stay made.
+                </p>
+              </div>
+              <div className="lp-act-visual">
+                <div className="lp-matrix" aria-hidden="true">
+                  <div className="lp-axis-y"><span>High</span><span>Influence</span><span>Low</span></div>
+                  <div className="lp-plot">
+                    <div className="lp-quad"><span>Champions</span></div>
+                    <div className="lp-quad"><span>Manage closely</span></div>
+                    <div className="lp-quad"><span>Keep informed</span></div>
+                    <div className="lp-quad"><span>Monitor</span></div>
+                    <span className="lp-node lp-hot" style={{ top: "26%", left: "76%" }}><i />Jordan</span>
+                    <span className="lp-node lp-champ" style={{ top: "30%", left: "26%" }}><i />Diego</span>
+                    <span className="lp-node" style={{ top: "70%", left: "44%" }}><i />Lena</span>
+                  </div>
+                  <div className="lp-axis-x"><span>Low</span><span>Friction</span><span>High</span></div>
                 </div>
               </div>
             </div>
-
-            <div className="lp-card lp-c2 lp-reveal" style={{ ["--d" as string]: ".07s" }}>
-              <div className="lp-card-ic"><Ic.checkSq /></div>
-              <h3>Decisions that keep their receipts</h3>
-              <p>Every record carries its evidence, its status, and the condition that would reverse it.</p>
-              <div className="lp-mini-callout">
-                <span className="lp-mini-k">Reverses if</span>sync error rate climbs back over 2%
-              </div>
-            </div>
-
-            <div className="lp-card lp-c3 lp-reveal">
-              <div className="lp-card-ic"><Ic.users /></div>
-              <h3>Stakeholders, mapped by influence and friction</h3>
-              <p>See who can move your roadmap, who&rsquo;s pushing against it, and who&rsquo;s gone quiet too long.</p>
-              <div className="lp-matrix" aria-hidden="true">
-                <div className="lp-axis-y"><span>High</span><span>Influence</span><span>Low</span></div>
-                <div className="lp-plot">
-                  <div className="lp-quad"><span>Champions</span></div>
-                  <div className="lp-quad"><span>Manage closely</span></div>
-                  <div className="lp-quad"><span>Keep informed</span></div>
-                  <div className="lp-quad"><span>Monitor</span></div>
-                  <span className="lp-node lp-hot" style={{ top: "26%", left: "76%" }}><i />Jordan</span>
-                  <span className="lp-node lp-champ" style={{ top: "30%", left: "26%" }}><i />Diego</span>
-                  <span className="lp-node" style={{ top: "70%", left: "44%" }}><i />Lena</span>
-                </div>
-                <div className="lp-axis-x"><span>Low</span><span>Friction</span><span>High</span></div>
-              </div>
-            </div>
-
-            <div className="lp-card lp-c3 lp-reveal" style={{ ["--d" as string]: ".07s" }}>
-              <div className="lp-card-ic"><Ic.clock /></div>
-              <h3>Strategy tensions, kept in the open</h3>
-              <p>When a weak signal collides with a committed bet, the conflict is surfaced and escalated, not quietly resolved.</p>
-              <div className="lp-mini-callout lp-mini-warn">
-                <span className="lp-mini-k">Open</span>
-                <code>T1</code> &middot; resourcing &middot; forcing 2026-07-28
-              </div>
-            </div>
-
-            <div className="lp-card lp-c2 lp-reveal">
-              <div className="lp-card-ic"><Ic.list /></div>
-              <h3>The ingestion feed</h3>
-              <p>New input lands here first, and is only promoted once it recurs.</p>
-              <div className="lp-mini-feed">
-                <div><span className="lp-mini-dot" /><b>Interview</b> &middot; Salesforce sync friction</div>
-                <div><span className="lp-mini-dot" /><b>Exit survey</b> &middot; notification overload</div>
-              </div>
-            </div>
-
-            <div className="lp-card lp-c4 lp-reveal" style={{ ["--d" as string]: ".07s" }}>
-              <div className="lp-card-ic"><Ic.activity /></div>
-              <h3>A weekly health check</h3>
-              <p>Broken links, stale notes, untagged claims, drifting indexes &mdash; caught automatically, every week, and surfaced rather than silently fixed.</p>
-              <div className="lp-mini-callout">
-                <span className="lp-mini-k">Last sweep</span>2 stale notes &middot; 1 untagged claim &middot; indexes clean
-              </div>
-            </div>
           </div>
-        </div>
-      </section>
 
-      {/* how it works */}
-      <section className="lp-sec" id="how">
-        <div className="lp-wrap">
-          <div className="lp-sec-head lp-reveal">
-            <div className="lp-kick">How it works</div>
-            <h2 className="lp-h2">It runs the same five moves on every signal, so nothing lands without a trace.</h2>
-          </div>
-          <div className="lp-loop lp-reveal">
-            <div className="lp-track" />
-            {[
-              ["Ingest", "The source is copied word-for-word before anything is synthesized. The original is never edited."],
-              ["Classify", "Observation, interpretation, hypothesis, decision, or assumption — every item wears its type."],
-              ["Retrieve", "It searches the folder before it asks you. Smallest-sufficient context, not a document dump."],
-              ["Act", "Synthesis and routing, citing the exact files it drew from, so you can audit the reasoning."],
-              ["Write back", "Hypotheses promoted or demoted, decisions logged, indexes kept in sync."],
-            ].map(([h, p], i) => (
-              <div className="lp-stage" key={i}>
-                <div className="lp-sdot" />
-                <span className="lp-sn lp-mono">STEP 0{i + 1}</span>
-                <h4>{h}</h4>
-                <p>{p}</p>
-              </div>
-            ))}
-          </div>
           <div className="lp-usage lp-reveal">
             <Ic.folder />
             <p>
-              <b>Point it at your workspace.</b> Set <code>BRAIN_DIR</code> to your PM Brain
+              <b>Point it at your own workspace.</b> Set <code>BRAIN_DIR</code> to your PM Brain
               folder and it reads live &mdash; no database, no export, and no changes to your files.
             </p>
           </div>
         </div>
       </section>
 
-      {/* principles */}
-      <section className="lp-sec">
+      {/* trust */}
+      <section className="lp-sec" id="trust">
         <div className="lp-wrap">
           <div className="lp-sec-head lp-reveal">
             <div className="lp-kick">Why you can trust it</div>
@@ -476,9 +431,8 @@ export default function LandingClient() {
           <div className="lp-prin">
             {[
               ["It never makes things up.", "No invented quotes, no guessed numbers, no motives pulled from thin air. When it doesn’t know, it says so."],
-              ["Every claim shows its source.", "A claim without provenance is flagged, not trusted."],
-              ["Facts and interpretations stay separate.", "“The customer said X” and “the customer is frustrated” are stored as different kinds of thing."],
-              ["Correlation isn’t promoted to cause.", "A small sample is a watch item, not a verdict. Confidence only rises on evidence that survives the check."],
+              ["Facts and opinions stay separate.", "“The customer said X” and “the customer seems frustrated” are stored as different kinds of thing, so an interpretation never hardens into a fact."],
+              ["One data point is a flag, not a verdict.", "A single or one-off signal is something to watch, not proof. Confidence only rises when the evidence holds up."],
             ].map(([h, p], i) => (
               <div className="lp-prin-item lp-reveal" key={i} style={{ ["--d" as string]: `${(i % 2) * 0.06}s` }}>
                 <span className="lp-pn lp-mono">0{i + 1}</span>
@@ -560,33 +514,6 @@ const Ic = {
   ),
   arrow: () => (
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-  ),
-  bell: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></svg>
-  ),
-  rotate: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 019-9 9 9 0 016.7 3M21 3v5h-5M21 12a9 9 0 01-9 9 9 9 0 01-6.7-3M3 21v-5h5" /></svg>
-  ),
-  shield: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5z" /><path d="M9 12l2 2 4-4" /></svg>
-  ),
-  chart: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18" /><path d="M7 14l4-4 3 3 5-6" /></svg>
-  ),
-  checkSq: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" /></svg>
-  ),
-  users: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" /></svg>
-  ),
-  clock: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-  ),
-  list: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 6h16M4 12h16M4 18h10" /></svg>
-  ),
-  activity: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>
   ),
   folder: () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" /></svg>
