@@ -1,14 +1,17 @@
 # Landing page — progress & handoff
 
 **Updated:** 2026-08-22
-**Branch:** `landing-page` (8 commits ahead of `main`; **not pushed, not deployed**)
+**Branch:** `landing-page` — **pushed**; PR [#2](https://github.com/gsmith2011/pm-command-center/pull/2)
+open against `main` (10 commits ahead). A Vercel **preview** auto-deploys per push (public preview
+URL in the PR's Vercel comment). **Production not deployed** — gated on merge + owner go.
 **Design spec:** [2026-08-21-landing-page-refresh-design.md](./2026-08-21-landing-page-refresh-design.md)
 
 ## Where to begin (new session)
-The public marketing landing page is **built, iterated three times, and verified**, living on
-the `landing-page` branch. It is **not pushed and not deployed** — production is gated on the
-owner's explicit approval. The immediate open decisions are: (1) push the branch + open a PR,
-and (2) the eventual Vercel production deploy. Everything else is optional polish.
+The public marketing landing page is **built, iterated, design-reviewed, security-QA'd, pushed,
+and open as PR [#2](https://github.com/gsmith2011/pm-command-center/pull/2)**. A Vercel preview
+deploys automatically on each push. The one remaining decision is the **Vercel production deploy**
+(on merge to `main`), which stays gated on the owner's explicit approval. Everything else is
+optional polish.
 
 Run it: `npm run dev`, then open `http://localhost:3000/` (landing) and `/overview` (the app).
 
@@ -59,8 +62,10 @@ nav; desktop `<h1>` wraps to 4 lines; the 28px regen button in the brief card is
 (scoped out — it's a desktop-hover affordance).
 
 ## Commit history (on `landing-page`, newest first)
-- design-review pass: FAQ entity fix, faint→AA on surface-2, hero scroll cue, mobile nav touch
-  target (this commit; also carries this doc update)
+- docs: reflect pushed + PR #2 + preview state (this commit)
+- `e276013` add Open Graph + Twitter metadata for shareable link previews
+- `72f3228` design-review fixes: FAQ entity, faint→AA on surface-2, hero scroll cue, mobile nav
+  touch target (also carried the prior doc update)
 - `fc0b905` docs: landing page progress + handoff
 - `3ee4d74` mobile pass + credibility band + motion polish
 - `824873e` v2: problem-led hero, 3-act narrative, denser + de-slopped
@@ -79,13 +84,17 @@ nav; desktop `<h1>` wraps to 4 lines; the 28px regen button in the brief card is
 - Product-screenshot idea (a framed shot of `/overview`) was **deliberately deferred**.
 
 ## Open items / next steps (priority order)
-1. **Push `landing-page` + open a PR** (production stays gated at the `main` merge). A branch
-   push *may* trigger a Vercel **preview** if the GitHub repo has a Vercel integration —
-   unconfirmed from the CLI.
-2. **Production deploy** to Vercel — hold for the owner's explicit go.
-3. Optional polish still on the table: a real product screenshot below the hero; further
-   copy tuning; the owner is the quality bar and has iterated hard, so expect more feedback.
-4. **Pre-deploy chore:** auto-generate a `THIRD-PARTY-LICENSES.md` (deps embed in the built
+1. ✅ **Done:** pushed `landing-page` + opened PR [#2](https://github.com/gsmith2011/pm-command-center/pull/2).
+   Confirmed the repo **does** have a Vercel integration — it auto-deploys a public **preview** per
+   push (URL lands in the PR's Vercel comment).
+2. **Production deploy** to Vercel — hold for the owner's explicit go (happens on merge to `main`).
+   At deploy time also: set `metadataBase` to the prod URL (makes the new OG/canonical URLs
+   absolute) and optionally add an OG image.
+3. **Confirm the external "See the source" link** → `github.com/phuryn/pm-brain` is the intended,
+   public upstream URL before production.
+4. Optional polish still on the table: a real product screenshot below the hero; the "Flo" demo
+   label vs. the `pm-brain-workspace` name shown in the app header; further copy tuning.
+5. **Pre-deploy chore:** auto-generate a `THIRD-PARTY-LICENSES.md` (deps embed in the built
    bundle). Not required for a source repo; do it at deploy time.
 
 ## Gotchas / lessons
