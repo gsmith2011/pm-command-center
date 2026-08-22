@@ -16,11 +16,6 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "PM Command Center",
   },
-  twitter: {
-    card: "summary",
-    title: TITLE,
-    description: DESCRIPTION,
-  },
 };
 
 export default function Landing() {
