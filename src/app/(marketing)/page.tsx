@@ -8,6 +8,7 @@ const DESCRIPTION =
   "PM Command Center reads your strategy, decisions, and user evidence from plain markdown and lays them out on one screen — what's believed, how strong the evidence is, and what needs your attention. Built on PM Brain OS.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://pm-command-center-gamma.vercel.app"),
   title: TITLE,
   description: DESCRIPTION,
   openGraph: {
